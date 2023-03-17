@@ -19,8 +19,8 @@ final class EbookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->words(6, true),
-            'description' => $this->faker->sentences(3, true),
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
             'amount' => $this->faker->randomFloat(2, 10, 80),
         ];
     }

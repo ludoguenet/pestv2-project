@@ -6,16 +6,23 @@ namespace App\Http\Controllers\Ebook;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ebook\StoreRequest;
-use App\Models\Ebook;
+use App\Repositories\Ebook\EbookRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 final class StoreController extends Controller
 {
+    public function __construct(
+        private readonly EbookRepository $ebookRepository,
+    ) {}
+
     public function __invoke(
         StoreRequest $request,
     ): RedirectResponse {
-        Ebook::create((array) $request->validated());
+        $this
+            ->ebookRepository
+            ->store(
+                validated: (array) $request->validated(),
+            );
 
         return redirect(
             to: route('homepage'),
