@@ -17,4 +17,18 @@ final class EbookRepository
     ): void {
         Ebook::create($validated);
     }
+
+    /**
+     * @param Ebook $ebook
+     * @param array<string, mixed> $validated
+     * @return Ebook
+     */
+    public function update(
+        Ebook $ebook,
+        array $validated,
+    ): Ebook {
+        $ebook->update($validated);
+
+        return $ebook->refresh();
+    }
 }
